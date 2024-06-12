@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # LiDAR-Radar-and-Camera-Data-Fusion-and-Analysis
-LiDAR, Radar and Camera Data Fusion and Analysis
 =======
 # Udacity Sensor Fusion Nanodegree Program
 
