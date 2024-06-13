@@ -28,23 +28,22 @@ The design of the project is based on the schematic shown above. I completed the
 
 #### 0. Match 2D objects
 
-In the [matching2D_Student.cpp](./src/matching2D_Student.cpp), I resued the mid-term project code to detect keypoints, extract descriptors and match descriptors. Various type of detectors and descriptors are implemented. ([3f78bae](https://github.com/fanweng/Udacity-Sensor-Fusion-Nanodegree/commit/3f78baee292a87ea4974cf637077b527ecf5433c))
+In the [matching2D_Student.cpp](./src/matching2D_Student.cpp), I resued the mid-term project code to detect keypoints, extract descriptors and match descriptors. Various type of detectors and descriptors are implemented.
 
 #### 1. Match 3D Objects
 
-In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), I implemented `matchBoundingBoxes()` method, in which inputs are previous and the current data frames as well as matched keypoints between the two frames. Only those bounding boxes containing the matched keypoints will be considered, i.e. within the ROI. For each bounding box in the previous frame, only one best match in the current frame is extracted. The final output is a hashmap of bounding box matches. ([63d2b20](https://github.com/fanweng/Udacity-Sensor-Fusion-Nanodegree/commit/63d2b206722ef6ffc1fd612227affa1bd3999cd0))
+In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), I implemented `matchBoundingBoxes()` method, in which inputs are previous and the current data frames as well as matched keypoints between the two frames. Only those bounding boxes containing the matched keypoints will be considered, i.e. within the ROI. For each bounding box in the previous frame, only one best match in the current frame is extracted. The final output is a hashmap of bounding box matches.
 
 #### 2. Compute TTC with Lidar data
 
-In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), `computeTTCLidar()` method was implemented. To eliminate the outliers (e.g. too close to ego vehicle), I used 20% of the total number of Lidar points to calculate the averaging closest distance to the preceding vehicle. This would be more robust than simply using the closest Lidar point. ([cc31837](https://github.com/fanweng/Udacity-Sensor-Fusion-Nanodegree/commit/cc318378f5741854b1086e21d47ed6c9364b8e9b))
+In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), `computeTTCLidar()` method was implemented. To eliminate the outliers (e.g. too close to ego vehicle), I used 20% of the total number of Lidar points to calculate the averaging closest distance to the preceding vehicle. This would be more robust than simply using the closest Lidar point.
 
 #### 3. Associate keypiont correspondences with bounding boxes
 
-In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), `clusterKptMatchesWithROI()` method was developed to associate keypoint correspondences with bounding boxes. All keypoint matches must belong to a 3D object, simply checking whether the corresponding keypoints are within the ROI in the camera image. To have a robust TTC estimation, outliers among the matches are removed using the mean of all euclidean distances between keypoint matches. ([35a4741](https://github.com/fanweng/Udacity-Sensor-Fusion-Nanodegree/commit/35a4741cc62d47bf9d6497fc2a50f538ba27265b))
-
+In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), `clusterKptMatchesWithROI()` method was developed to associate keypoint correspondences with bounding boxes. All keypoint matches must belong to a 3D object, simply checking whether the corresponding keypoints are within the ROI in the camera image. To have a robust TTC estimation, outliers among the matches are removed using the mean of all euclidean distances between keypoint matches.
 #### 4. Compute TTC with camera images
 
-In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), using the knowledge learned in the [Lecture 2-2 Collision Detection Systems](../../lectures/lec2-2-collision-detection-system.md), I completed the `computeTTCCamera` method. ([5271344](https://github.com/fanweng/Udacity-Sensor-Fusion-Nanodegree/commit/5271344f13cadc9d882d56c7e23fd2d7bbc36531))
+In the [camFusion_Student.cpp](./src/camFusion_Student.cpp), using the knowledge learned in the [Lecture 2-2 Collision Detection Systems](../../lectures/lec2-2-collision-detection-system.md), I completed the `computeTTCCamera` method.
 
 After finishing the pipeline in the [FinalProject_Camera.cpp](./src/FinalProject_Camera.cpp), I could generate TTC estimations based on both Lidar points and Camera images. An example output looks like the screenshot below.
 
